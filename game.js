@@ -1,3 +1,4 @@
+// Randomizes the computer's choice
 function getComputerChoice() {
     let c = Math.floor(Math.random() * 3)
     if (c == 0) {
@@ -9,6 +10,7 @@ function getComputerChoice() {
     }
 }
 
+// Plays a single round of rock paper scissors
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase()
     if (playerSelection == 'ROCK' && computerSelection == 'Rock') {
@@ -38,5 +40,29 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection == 'SCISSORS' && computerSelection == 'Scissors') {
         console.log('It\'s a draw! you both played scissors!')
         return 0
+    }
+}
+
+// Plays a 5 round game of rock paper scissors
+function game() {
+    let computerSelection
+    let playerSelection
+    let computerScore = 0
+    let playerScore = 0
+    let result
+    for (let i = 0; i < 5; i++) {
+        computerSelection = getComputerChoice()
+        playerSelection = prompt("Choose either Rock, Paper, or Scissors")
+        result = playRound(playerSelection, computerSelection)
+        if (result == 1) {
+            playerScore++
+        } else if (result == -1) {
+            computerScore++
+        }
+    }
+    if (playerScore > computerScore) {
+        console.log('You win!')
+    } else {
+        console.log('You lose!')
     }
 }
