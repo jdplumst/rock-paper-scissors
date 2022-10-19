@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    text-align: center;
+}
+
+button {
+    height: 100px;
+    width: 400px;
+    font-size: 48px;
+}
+
+.results, .end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.results {
+    height: 400px;
+    font-size: 48px;
+}
+
+.end {
+    height: 200px;
+    font-size: 32px;
+    white-space: pre;
+    text-align: center;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
