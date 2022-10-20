@@ -66,7 +66,7 @@ function updateScore(result) {
         playerTag.textContent = `Player Score: ${playerScore}`;
     } else if (result == -1) {
         computerScore++;
-        computerTag.textContent = `Computer Score : ${computerScore}`;
+        computerTag.textContent = `Computer Score: ${computerScore}`;
     }
     if (playerScore == 5) {
         endMsg.textContent = `You win! The score is ${playerScore} - ${computerScore}.\r\n`;
