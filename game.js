@@ -1,3 +1,20 @@
+// Select elements
+const resultsDiv = document.querySelector('.results');
+const endDiv = document.querySelector('.end');
+const endMsg = document.querySelector('.end-msg');
+const transluscentDiv = document.querySelector('.transluscent');
+const playBtn = document.querySelector('.end-btn');
+const btns = document.querySelectorAll('.game');
+const playerTag = document.querySelector('.player');
+const computerTag = document.querySelector('.computer');
+
+// Set player and computer scores
+let playerScore = 0;
+let computerScore = 0;
+
+// Set result variable (1 = player win, -1 = computer win, 0 = draw)
+let result = 0;
+
 // Randomizes the computer's choice
 function getComputerChoice() {
     let c = Math.floor(Math.random() * 3)
@@ -9,10 +26,6 @@ function getComputerChoice() {
         return 'Scissors'
     }
 }
-
-// Select results and end div
-const resultsDiv = document.querySelector('.results');
-const endDiv = document.querySelector('.end');
 
 // Plays a single round of rock paper scissors
 function playRound(playerSelection, computerSelection) {
@@ -46,18 +59,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Set player and computer scores
-let playerScore = 0;
-let computerScore = 0;
-
-// Set result variable (1 = player win, -1 = computer win, 0 = draw)
-let result = 0;
-
-
-// Select player and computer score paragraphs
-const playerTag = document.querySelector('.player');
-const computerTag = document.querySelector('.computer');
-
 // Updates the scoreboard after every round
 function updateScore(result) {
     if (result == 1) {
@@ -68,26 +69,19 @@ function updateScore(result) {
         computerTag.textContent = `Computer Score : ${computerScore}`;
     }
     if (playerScore == 5) {
-        endDiv.textContent = `You win! The score is ${playerScore} - ${computerScore}.\r\n` +
-            `Press a button to start a new game and play again.`;
+        endMsg.textContent = `You win! The score is ${playerScore} - ${computerScore}.\r\n`;
+        endDiv.style.display = 'block';
+        transluscentDiv.style.display = 'block';
     } else if (computerScore == 5) {
-        endDiv.textContent = `You lose! The score is ${playerScore} - ${computerScore}.\r\n` +
-            `Press a button to start a new game and play again.`;
+        endMsg.textContent = `You lose! The score is ${playerScore} - ${computerScore}.\r\n`;
+        endDiv.style.display = 'block';
+        transluscentDiv.style.display = 'block';
     }
 }
 
-// Select the buttons and play a round whenever one of the buttons is clicked
-const btns = document.querySelectorAll('button');
 btns.forEach((btn) => {
+    // Play a round whenever one of the buttons is clicked
     btn.addEventListener('click', () => {
-        // Reset scoreboard if either player or computer reached 5 points
-        if (playerScore == 5 || computerScore == 5) {
-            playerScore = 0;
-            computerScore = 0;
-            playerTag.textContent = `Player Score: ${playerScore}`;
-            computerTag.textContent = `Computer Score : ${computerScore}`;
-            endDiv.textContent = '';
-        } 
         // Play a round
         if (btn.id == 'Rock') {
             result = playRound('Rock', getComputerChoice());
@@ -98,5 +92,36 @@ btns.forEach((btn) => {
         }
         // Update scoreboard
         updateScore(result);
+    }),
+
+    // Apply hover effect to buttons when mouse hovers over them
+    btn.addEventListener('mouseover', () => {
+        btn.classList.add('hover');
+    }),
+
+    // Remove hover effect from buttons when mouse goes off of the buttons
+    btn.addEventListener('mouseout', () => {
+        btn.classList.remove('hover');
     })
 });
+
+// Reset game
+playBtn.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    playerTag.textContent = `Player Score: ${playerScore}`;
+    computerTag.textContent = `Computer Score : ${computerScore}`;
+    endMsg.textContent = '';
+    endDiv.style.display = 'none';
+    transluscentDiv.style.display = 'none';
+    resultsDiv.textContent = ''; 
+})
+
+// Apply hover effect to play again button
+playBtn.addEventListener('mouseover', () => {
+    playBtn.classList.add('hover');
+})
+
+playBtn.addEventListener('mouseout', () => {
+    playBtn.classList.remove('hover');
+})
